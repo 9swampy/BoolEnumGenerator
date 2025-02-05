@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="7.1.0" />
+        <PackageReference Include="xunit" Version="2.9.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BoolEnumGenerator\BoolEnumGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+        <ProjectReference Include="..\SharedGenerator\SharedGenerator.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Generated\BoolEnumGenerator\" />
+    </ItemGroup>
+
+    <!--<ItemGroup>
+        <Compile Include="$(BaseIntermediateOutputPath)generated\**\*.cs" />
+    </ItemGroup>-->
+
+</Project>
