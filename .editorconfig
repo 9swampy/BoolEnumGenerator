@@ -83,7 +83,8 @@ csharp_prefer_braces = true:silent
 csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_expression_bodied_methods = false:silent
-csharp_style_expression_bodied_operators = false:silent
+#csharp_style_expression_bodied_operators = false:silent
+csharp_style_expression_bodied_operators = when_on_single_line:silent
 csharp_style_expression_bodied_properties = true:silent
 csharp_style_expression_bodied_indexers = true:silent
 csharp_style_expression_bodied_accessors = true:silent
@@ -104,6 +105,7 @@ dotnet_diagnostic.IDE0063.severity = none
 
 # IDE0057: Use range operator
 dotnet_diagnostic.IDE0057.severity = none
+csharp_prefer_system_threading_lock = true:suggestion
 
 [*.{cs,vb}]
 dotnet_diagnostic.CA1707.severity=warning

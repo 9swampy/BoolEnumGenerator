@@ -2,26 +2,39 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GeneratedOutputPath>$(IntermediateOutputPath)\Generated</GeneratedOutputPath>
     </PropertyGroup>
 
+    <!-- Clean the generated files before generation starts -->
+    <Target Name="CleanGeneratedFiles" BeforeTargets="Build">
+        <Message Text="Cleaning generated files in $(GeneratedOutputPath)\**\*.cs..." Importance="high" />
+        <ItemGroup>
+            <GeneratedFiles Include="$(GeneratedOutputPath)\**\*.cs" />
+        </ItemGroup>
+        <Message Text="Files to be deleted: @(GeneratedFiles)" Importance="high" />
+        <Delete Files="@(GeneratedFiles)">
+            <Output TaskParameter="DeletedFiles" ItemName="DeletedFiles" />
+        </Delete>
+        <Message Text="Deleted file: %(DeletedFiles.Identity)" Importance="high" />
+    </Target>
+
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="7.1.0" />
+        <PackageReference Include="AwesomeAssertions" Version="7.2.1" />
         <PackageReference Include="xunit" Version="2.9.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BoolEnumGenerator\BoolEnumGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
-        <ProjectReference Include="..\SharedGenerator\SharedGenerator.csproj" />
+        <ProjectReference Include="..\BoolParameterGenerator\PrimS.BoolParameterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
     </ItemGroup>
 
+    <!-- Exclude the generated files from SolutionExplorer -->
     <ItemGroup>
-      <Folder Include="Generated\BoolEnumGenerator\" />
+        <Compile Remove="Generated\**" />
+        <EmbeddedResource Remove="Generated\**" />
+        <None Remove="$(GeneratedOutputPath)\**\*.cs" />
+        <None Remove="Generated\**" />
     </ItemGroup>
-
-    <!--<ItemGroup>
-        <Compile Include="$(BaseIntermediateOutputPath)generated\**\*.cs" />
-    </ItemGroup>-->
 
 </Project>
