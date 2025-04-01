@@ -18,7 +18,7 @@ public abstract class BaseGenerator<TReceiver>(string generatorName, string attr
   public void Execute(GeneratorExecutionContext context)
   {
     context.ReportDiagnostic(Diagnostic.Create(
-        new DiagnosticDescriptor("BEG001", "Info", $"{GeneratorName} is running", "SourceGen", DiagnosticSeverity.Info, true),
+        new DiagnosticDescriptor("BEG001", "Warning", $"{GeneratorName} is running", "SourceGen", DiagnosticSeverity.Warning, true),
         Location.None));
 
     // Check if the receiver is properly set up and receiving candidates
@@ -33,7 +33,7 @@ public abstract class BaseGenerator<TReceiver>(string generatorName, string attr
     if (receiver.Candidates.Count == 0)
     {
       context.ReportDiagnostic(Diagnostic.Create(
-          new DiagnosticDescriptor("BEG003", "Warning", "No classes found to process.", "SourceGen", DiagnosticSeverity.Info, true),
+          new DiagnosticDescriptor("BEG003", "Info", "No classes found to process.", "SourceGen", DiagnosticSeverity.Warning, true),
           Location.None));
     }
 
@@ -86,6 +86,10 @@ public abstract class BaseGenerator<TReceiver>(string generatorName, string attr
       context.ReportDiagnostic(Diagnostic.Create(
                 new DiagnosticDescriptor("BEG004", "Info", $"Generated code for class: {binaryEnumName}", "SourceGen", DiagnosticSeverity.Info, true),
                 Location.None));
+
+      context.ReportDiagnostic(Diagnostic.Create(
+        new DiagnosticDescriptor("BEG007", "Info", $"{GeneratorName} has completed", "SourceGen", DiagnosticSeverity.Info, true),
+        Location.None));
     }
   }
 

@@ -1,9 +1,5 @@
 ﻿namespace PrimS.BoolParameterGenerator;
-
-using System;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
 
 [Generator]
 public class BinaryEnumGenerator() : BaseGenerator<BinaryEnumSyntaxReceiver>(nameof(BinaryEnumGenerator), nameof(GenerateBinaryEnumAttribute))

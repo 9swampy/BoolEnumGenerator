@@ -1,20 +1,62 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<OutputType>Library</OutputType>
-		<LangVersion>Latest</LangVersion>
-		<LangVersion>latest</LangVersion>
-      <ImplicitUsings>disable</ImplicitUsings>
-      <Nullable>enable</Nullable>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <OutputType>Library</OutputType>
+        <LangVersion>Latest</LangVersion>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 
-		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-	</PropertyGroup>
+        <!-- NuGet package properties -->
+        <PackageId>BoolParameterGenerator</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>9swampy</Authors>
+        <Description>Autogenerate replacement types for boolean parameters.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/9swampy/BoolEnumGenerator</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/9swampy/BoolEnumGenerator</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.CodeAnalysis" Version="4.0.1" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="4.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="" />
+        <None Include="bin\$(Configuration)\netstandard2.0\PrimS.BoolParameterGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />
+        <!--<None Include="..\SharedGenerator\bin\$(Configuration)\netstandard2.0\PrimS.BoolParameterGenerator.Shared.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />-->
+        <!--<Content Include="..\SharedGenerator\bin\$(Configuration)\netstandard2.0\PrimS.BoolParameterGenerator.Shared.dll" Pack="true" PackagePath="lib/netstandard2.0/" Visible="false" />-->
+        <!--<Content Include="..\SharedGenerator\bin\$(Configuration)\netstandard2.0\PrimS.BoolParameterGenerator.Shared.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />-->
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SharedGenerator\PrimS.BoolParameterGenerator.Shared.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="..\SharedGenerator\bin\$(Configuration)\netstandard2.0\PrimS.BoolParameterGenerator.Shared.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />
+        <!--<ProjectReference Update="..\SharedGenerator\PrimS.BoolParameterGenerator.Shared.csproj">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <Pack>true</Pack>
+        </ProjectReference>-->        
+    </ItemGroup>
+
+    <Target Name="UnzipPackage" AfterTargets="Pack">
+        <RemoveDir Directories="bin\$(Configuration)\unzipped" />
+        <Exec Command="powershell -Command &quot;Copy-Item -Path 'bin\$(Configuration)\BoolParameterGenerator.1.0.0.nupkg' 'bin\$(Configuration)\BoolParameterGenerator.1.0.0.zip'&quot;" />
+        <Exec Command="powershell -Command &quot;Expand-Archive -Path 'bin\$(Configuration)\BoolParameterGenerator.1.0.0.zip' -DestinationPath 'bin\$(Configuration)\unzipped'&quot;" />
+    </Target>
+
 </Project>
 

@@ -1,16 +1,12 @@
-﻿
-namespace FluentAssertions
-{
-  using System;
-  using FluentAssertions.Execution;
-  using FluentAssertions.Primitives;
-  using Another;
+﻿#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace FluentAssertions;
 
-  public static class IsValidThreeExtensions
+using Another;
+
+public static partial class IsValidThreeExtensions
+{
+  public static IsValidThreeAssertions Should(this IsValidThree instance)
   {
-      public static IsValidThreeAssertions Should(this IsValidThree instance)
-      {
-          return new IsValidThreeAssertions(instance);
-      }
+    return new IsValidThreeAssertions(instance);
   }
 }

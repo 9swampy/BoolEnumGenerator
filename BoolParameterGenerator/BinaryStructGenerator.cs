@@ -1,12 +1,5 @@
 ﻿namespace PrimS.BoolParameterGenerator;
-
-using System;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Text;
 
 [Generator]
 public class BinaryStructGenerator() : BaseGenerator<BinaryStructSyntaxReceiver>(nameof(BinaryStructGenerator), nameof(GenerateBinaryStructAttribute))

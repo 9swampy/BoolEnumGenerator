@@ -1,11 +1,12 @@
-﻿namespace PrimS.BoolParameterGenerator;
+﻿#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace PrimS.BoolParameterGenerator;
 
 using System;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-public class GenerateBinaryStructAttribute(string namespaceName, string trueMember, string falseMember) : Attribute
+public class GenerateBinaryEnumAttribute(string namespaceName, string trueMember, string falseMember) : Attribute
 {
-  public GenerateBinaryStructAttribute(string namespaceName)
+  public GenerateBinaryEnumAttribute(string namespaceName)
     : this(namespaceName, "True", "False")
   { }
 

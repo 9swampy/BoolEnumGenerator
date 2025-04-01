@@ -1,65 +1,60 @@
-﻿
-namespace Another
+﻿namespace Another;
+
+using FluentAssertions.Execution;
+using FluentAssertions.Primitives;
+using FluentAssertions;
+
+public partial class IsValidThreeAssertions(IsValidThree instance) : ReferenceTypeAssertions<IsValidThree, IsValidThreeAssertions>(instance)
 {
-  using System;
-  using FluentAssertions.Execution;
-  using FluentAssertions.Primitives;
-  using FluentAssertions;
+  protected override string Identifier => "IsValidThree";
 
-  public class IsValidThreeAssertions : ReferenceTypeAssertions<IsValidThree, IsValidThreeAssertions>
+  public AndConstraint<IsValidThreeAssertions> BeTrue(string because = "", params object[] becauseArgs)
   {
-      public IsValidThreeAssertions(IsValidThree instance) : base(instance) { }
+    Execute.Assertion
+        .ForCondition(Subject == true)
+        .BecauseOf(because, becauseArgs)
+        .FailWith("Expected {context:IsValidThree} to be true but found {0}.", Subject);
 
-      protected override string Identifier => "IsValidThree";
+    return new AndConstraint<IsValidThreeAssertions>(this);
+  }
 
-      public AndConstraint<IsValidThreeAssertions> BeTrue(string because = "", params object[] becauseArgs)
-      {
-          Execute.Assertion
-              .ForCondition(Subject == true)
-              .BecauseOf(because, becauseArgs)
-              .FailWith("Expected {context:IsValidThree} to be true but found {0}.", Subject);
+  public AndConstraint<IsValidThreeAssertions> BeFalse(string because = "", params object[] becauseArgs)
+  {
+    Execute.Assertion
+        .ForCondition(Subject == false)
+        .BecauseOf(because, becauseArgs)
+        .FailWith("Expected {context:IsValidThree} to be false but found {0}.", Subject);
 
-          return new AndConstraint<IsValidThreeAssertions>(this);
-      }
+    return new AndConstraint<IsValidThreeAssertions>(this);
+  }
 
-      public AndConstraint<IsValidThreeAssertions> BeFalse(string because = "", params object[] becauseArgs)
-      {
-          Execute.Assertion
-              .ForCondition(Subject == false)
-              .BecauseOf(because, becauseArgs)
-              .FailWith("Expected {context:IsValidThree} to be false but found {0}.", Subject);
+  public AndConstraint<IsValidThreeAssertions> NotBe(IsValidThree unexpected, string because = "", params object[] becauseArgs)
+  {
+    return NotBe((bool)unexpected, because, becauseArgs);
+  }
 
-          return new AndConstraint<IsValidThreeAssertions>(this);
-      }
+  public AndConstraint<IsValidThreeAssertions> NotBe(bool unexpected, string because = "", params object[] becauseArgs)
+  {
+    Execute.Assertion
+        .ForCondition(Subject != unexpected)
+        .BecauseOf(because, becauseArgs)
+        .FailWith("Expected {context:IsValidThree} to not be {0} but found {1}.", unexpected, Subject);
 
-      public AndConstraint<IsValidThreeAssertions> NotBe(IsValidThree unexpected, string because = "", params object[] becauseArgs)
-      {
-          return NotBe((bool)unexpected, because, becauseArgs);
-      }
+    return new AndConstraint<IsValidThreeAssertions>(this);
+  }
 
-      public AndConstraint<IsValidThreeAssertions> NotBe(bool unexpected, string because = "", params object[] becauseArgs)
-      {
-          Execute.Assertion
-              .ForCondition(Subject != unexpected)
-              .BecauseOf(because, becauseArgs)
-              .FailWith("Expected {context:IsValidThree} to not be {0} but found {1}.", unexpected, Subject);
+  public AndConstraint<IsValidThreeAssertions> Be(IsValidThree expected, string because = "", params object[] becauseArgs)
+  {
+    return Be((bool)expected, because, becauseArgs);
+  }
 
-          return new AndConstraint<IsValidThreeAssertions>(this);
-      }
+  public AndConstraint<IsValidThreeAssertions> Be(bool expected, string because = "", params object[] becauseArgs)
+  {
+    Execute.Assertion
+        .ForCondition(Subject == expected)
+        .BecauseOf(because, becauseArgs)
+        .FailWith("Expected {context:IsValidThree} to be {0} but found {1}.", expected, Subject);
 
-      public AndConstraint<IsValidThreeAssertions> Be(IsValidThree expected, string because = "", params object[] becauseArgs)
-      {
-          return Be((bool)expected, because, becauseArgs);
-      }
-
-      public AndConstraint<IsValidThreeAssertions> Be(bool expected, string because = "", params object[] becauseArgs)
-      {
-          Execute.Assertion
-              .ForCondition(Subject == expected)
-              .BecauseOf(because, becauseArgs)
-              .FailWith("Expected {context:IsValidThree} to be {0} but found {1}.", expected, Subject);
-
-          return new AndConstraint<IsValidThreeAssertions>(this);
-      }
+    return new AndConstraint<IsValidThreeAssertions>(this);
   }
 }

@@ -1,7 +1,6 @@
 namespace Another.Tests;
 
 using FluentAssertions;
-using Newtonsoft.Json.Linq;
 
 public class IsValidBoolThreeTests
 {
@@ -23,14 +22,14 @@ public class IsValidBoolThreeTests
   public void GivenIsValidBoolThreeTrueWhenCastBoolShouldBeTrue()
   {
     var isValidBoolThree = IsValidBoolThree.Yes;
-    (isValidBoolThree).Should().BeTrue();
+    isValidBoolThree.Should().BeTrue();
   }
 
   [Fact]
   public void GivenIsValidBoolThreeNoWhenCastBoolShouldBeFalse()
   {
     var isValidBoolThree = IsValidBoolThree.No;
-    (isValidBoolThree).Should().BeFalse();
+    isValidBoolThree.Should().BeFalse();
   }
 
   [Fact]
@@ -176,6 +175,7 @@ public class IsValidBoolThreeTests
   [Theory]
   [InlineData(true)]
   [InlineData(false)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "Don't simplify member access - it's sometimes helpful to see that Another namespace hasn't even been generated.")]
   public void FromBoolShouldMatchBool(bool expected)
   {
     // Don't simplify member access - it's sometimes helpful 
