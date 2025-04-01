@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BoolParameterGenerator\PrimS.BoolParameterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+        <ProjectReference Include="..\SharedGenerator\PrimS.BoolParameterGenerator.Shared.csproj" /> <!--ReferenceOutputAssembly="true"  />-->
     </ItemGroup>
 
     <!-- Exclude the generated files from SolutionExplorer -->

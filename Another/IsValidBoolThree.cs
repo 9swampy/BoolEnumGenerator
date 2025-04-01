@@ -3,7 +3,7 @@ namespace Another;
 
 using Ardalis.SmartEnum;
   
-public class IsValidBoolThree : SmartEnum<IsValidBoolThree, bool>
+public partial class IsValidBoolThree : SmartEnum<IsValidBoolThree, bool>
 {
   public static readonly IsValidBoolThree No = new IsValidBoolThree(nameof(No), false);
   public static readonly IsValidBoolThree Yes = new IsValidBoolThree(nameof(Yes), true);

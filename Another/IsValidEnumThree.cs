@@ -1,8 +1,9 @@
 ﻿namespace Another;
 
+using PrimS.BoolParameterGenerator;
 using System;
 
-public class IsValidEnumThree : SmartEnumWrapper<IsValidEnumThree, ProxyEnum>, IEquatable<ProxyEnum>, IComparable<ProxyEnum>, IEquatable<ProxyEnumWrapper<IsValidEnumThree, ProxyEnum>>, IComparable<ProxyEnumWrapper<IsValidEnumThree, ProxyEnum>>
+public partial class IsValidEnumThree : SmartEnumWrapper<IsValidEnumThree, ProxyEnum>, IEquatable<ProxyEnum>, IComparable<ProxyEnum>, IEquatable<ProxyEnumWrapper<IsValidEnumThree, ProxyEnum>>, IComparable<ProxyEnumWrapper<IsValidEnumThree, ProxyEnum>>
 {
   public static readonly IsValidEnumThree No = new IsValidEnumThree(nameof(No), ProxyEnum.False);
   public static readonly IsValidEnumThree Yes = new IsValidEnumThree(nameof(Yes), ProxyEnum.True);
@@ -25,10 +26,7 @@ public class IsValidEnumThree : SmartEnumWrapper<IsValidEnumThree, ProxyEnum>, I
   private IsValidEnumThree(string name, ProxyEnum value) : base(name, value)
   { }
 
-  public static implicit operator bool(IsValidEnumThree value)
-  {
-    return value.Value == ProxyEnum.True;
-  }
+  public static implicit operator bool(IsValidEnumThree value) => value.Value == ProxyEnum.True;
 
   public static implicit operator IsValidEnumThree(bool value) => value ? Yes : No;
 
@@ -48,7 +46,7 @@ public class IsValidEnumThree : SmartEnumWrapper<IsValidEnumThree, ProxyEnum>, I
 
   public static bool operator !=(bool left, IsValidEnumThree right) => (left ? 1 : 0) != (int)right.Value.Value;
 
-  public static implicit operator IsValidEnumThree(ProxyEnum value) => IsValidEnumThree.FromValue(value);
+  public static implicit operator IsValidEnumThree(ProxyEnum value) => FromValue(value);
 
   public override bool Equals(object obj) => obj is IsValidEnumThree other && this == other;
 

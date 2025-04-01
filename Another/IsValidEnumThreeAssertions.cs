@@ -1,14 +1,11 @@
 ﻿namespace Another;
 
-using System;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using FluentAssertions;
 
-public class IsValidEnumThreeAssertions : ReferenceTypeAssertions<IsValidEnumThree, IsValidEnumThreeAssertions>
+public partial class IsValidEnumThreeAssertions(IsValidEnumThree instance) : ReferenceTypeAssertions<IsValidEnumThree, IsValidEnumThreeAssertions>(instance)
 {
-  public IsValidEnumThreeAssertions(IsValidEnumThree instance) : base(instance) { }
-
   protected override string Identifier => "IsValidEnumThree";
 
   public AndConstraint<IsValidEnumThreeAssertions> BeTrue(string because = "", params object[] becauseArgs)
