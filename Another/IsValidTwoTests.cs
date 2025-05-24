@@ -156,7 +156,7 @@
 //    }
 
 //    [Fact]
-//    public void GivenBoolTrueShouldNotEqualOppositeisValidTwo()
+//    public void GivenBoolTrueShouldNotEqualOppositeIsValidTwo()
 //    {
 //      (IsValidTwo.True == false).Should().BeFalse();
 //    }

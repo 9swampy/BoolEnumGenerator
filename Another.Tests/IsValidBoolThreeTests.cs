@@ -145,7 +145,7 @@ public class IsValidBoolThreeTests
   }
 
   [Fact]
-  public void GivenBoolTrueShouldNotEqualOppositeisValidBoolThree()
+  public void GivenBoolTrueShouldNotEqualOppositeIsValidBoolThree()
   {
     (IsValidBoolThree.Yes == false).Should().BeFalse();
   }

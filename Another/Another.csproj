@@ -25,10 +25,10 @@
         <PackageReference Include="xunit" Version="2.9.3" />
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\SharedGenerator\PrimS.BoolParameterGenerator.Shared.csproj" /> <!--ReferenceOutputAssembly="true"  />-->
+<ItemGroup>
+      <ProjectReference Include="..\BoolParameterGenerator\PrimS.BoolParameterGenerator.csproj" />
+      <ProjectReference Include="..\SharedGenerator\PrimS.BoolParameterGenerator.Shared.csproj" />
     </ItemGroup>
-
     <!-- Exclude the generated files from SolutionExplorer -->
     <ItemGroup>
         <Compile Remove="Generated\**" />
