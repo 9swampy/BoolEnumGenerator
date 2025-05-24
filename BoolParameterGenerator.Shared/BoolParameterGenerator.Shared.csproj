@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+
+    <PackageId>BoolParameterGenerator.Shared</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>9swampy</Authors>
+    <Description>Shared types for BoolParameterGenerator and related analyzers.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/9swampy/BoolEnumGenerator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/9swampy/BoolEnumGenerator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RootNamespace>PrimS.$(MSBuildProjectName.Replace(" ", "_").Replace(".Shared", ""))</RootNamespace>
+    <PackageOutputPath>$(SolutionDir).nupkgs</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- Unzip packed .nupkg to inspect contents -->
+  <Target Name="UnzipPackage" AfterTargets="Pack" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <Copy SourceFiles="$(PackageOutputPath)/BoolParameterGenerator.Shared.1.0.0.nupkg" DestinationFiles="$(PackageOutputPath)/boolparametergenerator.shared.1.0.0.zip" OverwriteReadOnlyFiles="true" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;Expand-Archive -Path '$(PackageOutputPath)/boolparametergenerator.shared.1.0.0.zip' -DestinationPath '$(PackageOutputPath)/boolparametergenerator.shared.1.0.0.unzipped' -Force&quot;" />
+    <Message Text="### BoolParameterGenerator.Shared_AfterPack finished ###" Importance="high" />
+  </Target>
+
+</Project>

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3CBD4D8E-6D8E-4B8C-AA49-71557771A6FB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		CommonTest.props = CommonTest.props
 		Directory.build.props = Directory.build.props
 		ReadMe.md = ReadMe.md
@@ -15,9 +16,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Another.Tests", "Another.Tests\Another.Tests.csproj", "{E5F46C83-570B-4111-AB4E-407E21F90332}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimS.BoolParameterGenerator", "BoolParameterGenerator\PrimS.BoolParameterGenerator.csproj", "{0A69A9AF-44E1-C56B-3A2A-6032D4F59074}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolParameterGenerator", "BoolParameterGenerator\BoolParameterGenerator.csproj", "{0A69A9AF-44E1-C56B-3A2A-6032D4F59074}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F6222A3-B18C-E9E1-E941-8016A7F26465} = {4F6222A3-B18C-E9E1-E941-8016A7F26465}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimS.BoolParameterGenerator.Nuget.Tests", "PrimS.BoolParameterGenerator.Nuget.Tests\PrimS.BoolParameterGenerator.Nuget.Tests.csproj", "{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolParameterGenerator.Pack.Tests", "BoolParameterGenerator.Pack.Tests\BoolParameterGenerator.Pack.Tests.csproj", "{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0A69A9AF-44E1-C56B-3A2A-6032D4F59074} = {0A69A9AF-44E1-C56B-3A2A-6032D4F59074}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolParameterGenerator.Github.Tests", "BoolParameterGenerator.Github.Tests\BoolParameterGenerator.Github.Tests.csproj", "{82808403-BBB5-4C87-9B80-4E463FF954FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolParameterGenerator.Shared", "BoolParameterGenerator.Shared\BoolParameterGenerator.Shared.csproj", "{4F6222A3-B18C-E9E1-E941-8016A7F26465}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +52,14 @@ Global
 		{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82808403-BBB5-4C87-9B80-4E463FF954FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82808403-BBB5-4C87-9B80-4E463FF954FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82808403-BBB5-4C87-9B80-4E463FF954FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82808403-BBB5-4C87-9B80-4E463FF954FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,6 @@
 namespace Another.Tests;
 
 using FluentAssertions;
-using PrimS.BoolParameterGenerator;
 
 public class IsValidBoolThreeTests
 {

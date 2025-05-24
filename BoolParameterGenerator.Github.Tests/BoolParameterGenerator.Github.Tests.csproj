@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <Import Project="..\CommonTest.props" />
+
+  <ItemGroup>
+    <PackageReference Include="BoolParameterGenerator" Version="0.1.0-feature-AddGitVersionAndPushToGithub.1-12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Another.Tests\IsValidBoolThreeTests.cs" Link="IsValidBoolThreeTests.cs" />
+    <Compile Include="..\Another.Tests\IsValidEnumThreeTests.cs" Link="IsValidEnumThreeTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>
