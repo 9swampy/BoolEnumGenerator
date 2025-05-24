@@ -1,4 +1,6 @@
-﻿namespace PrimS.BoolParameterGenerator.Nuget.Tests;
+﻿namespace Another;
+
+using PrimS.BoolParameterGenerator;
 
 [GenerateBinaryEnum("Yes", "No")]
 public partial class IsValidEnumThree

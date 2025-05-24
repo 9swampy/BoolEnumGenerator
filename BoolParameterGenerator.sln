@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimS.BoolParameterGenerato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimS.BoolParameterGenerator.Nuget.Tests", "PrimS.BoolParameterGenerator.Nuget.Tests\PrimS.BoolParameterGenerator.Nuget.Tests.csproj", "{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimS.BoolParameterGenerator.Shared", "SharedGenerator\PrimS.BoolParameterGenerator.Shared.csproj", "{4F6222A3-B18C-E9E1-E941-8016A7F26465}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,10 +41,6 @@ Global
 		{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA2FAF55-93B0-06B7-DA92-BAC928E6F1FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F6222A3-B18C-E9E1-E941-8016A7F26465}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

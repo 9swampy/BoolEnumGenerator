@@ -13,11 +13,15 @@
 	<Import Project="..\CommonTest.props" />
 
 	<ItemGroup>
+	  <Compile Include="..\Another.Tests\IsValidBoolThreeTests.cs" Link="IsValidBoolThreeTests.cs" />
+	  <Compile Include="..\Another.Tests\IsValidEnumThreeTests.cs" Link="IsValidEnumThreeTests.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis" Version="4.0.1" />
 		<PackageReference Include="BoolParameterGenerator" Version="1.0.0" />
-		<PackageReference Include="PrimS.BoolParameterGenerator.Shared" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -25,11 +29,11 @@
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-		<RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Debug;..\SharedGenerator\bin\Debug</RestoreSources>
+		<RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Debug</RestoreSources>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Release;..\SharedGenerator\bin\Release</RestoreSources>
+		<RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Release</RestoreSources>
 	</PropertyGroup>
 
 	<!--<ItemGroup>

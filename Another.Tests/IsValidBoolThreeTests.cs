@@ -1,6 +1,7 @@
 namespace Another.Tests;
 
 using FluentAssertions;
+using PrimS.BoolParameterGenerator;
 
 public class IsValidBoolThreeTests
 {
@@ -145,7 +146,7 @@ public class IsValidBoolThreeTests
   }
 
   [Fact]
-  public void GivenBoolTrueShouldNotEqualOppositeisValidBoolThree()
+  public void GivenBoolTrueShouldNotEqualOppositeIsValidBoolThree()
   {
     (IsValidBoolThree.Yes == false).Should().BeFalse();
   }

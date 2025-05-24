@@ -26,7 +26,6 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynAnalyzer>true</IsRoslynAnalyzer>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <RestoreSources>$(RestoreSources);..\SharedGenerator\bin\Release</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,7 +33,6 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
-    <PackageReference Include="PrimS.BoolParameterGenerator.Shared" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +43,6 @@
 
   <Target Name="ClearNugetCache" BeforeTargets="Pack">
     <RemoveDir Directories="$(USERPROFILE)\.nuget\packages\boolparametergenerator"></RemoveDir>
-    <RemoveDir Directories="$(USERPROFILE)\.nuget\packages\prims.boolparametergenerator.shared"></RemoveDir>
     <!--<Exec Command="powershell -Command &quot;nuget locals all -clear&quot;" />-->
   </Target>
 
