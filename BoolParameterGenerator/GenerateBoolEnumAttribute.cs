@@ -3,13 +3,11 @@
 using System;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-public class GenerateBoolEnumAttribute(string namespaceName, string trueMember, string falseMember) : Attribute
+public class GenerateBoolEnumAttribute(string trueMember, string falseMember) : Attribute
 {
-  public GenerateBoolEnumAttribute(string namespaceName)
-    : this(namespaceName, "True", "False")
+  public GenerateBoolEnumAttribute()
+    : this("True", "False")
   { }
-
-  public string NamespaceName { get; } = namespaceName;
 
   public string TrueMember { get; } = trueMember;
 

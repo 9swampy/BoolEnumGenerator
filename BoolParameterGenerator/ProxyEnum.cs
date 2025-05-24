@@ -1,9 +1,7 @@
-﻿
-namespace Another
+﻿namespace PrimS.BoolParameterGenerator;
+
+public enum ProxyEnum
 {
-  public enum ProxyEnum
-  {
-    False = 0,
-    True = 1
-  }
+  False = 0,
+  True = 1
 }

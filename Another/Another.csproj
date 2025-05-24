@@ -1,40 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>disable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <GeneratedOutputPath>$(IntermediateOutputPath)\Generated</GeneratedOutputPath>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratedOutputPath>$(IntermediateOutputPath)\Generated</GeneratedOutputPath>
+  </PropertyGroup>
 
-    <!-- Clean the generated files before generation starts -->
-    <Target Name="CleanGeneratedFiles" BeforeTargets="Build">
-        <Message Text="Cleaning generated files in $(GeneratedOutputPath)\**\*.cs..." Importance="high" />
-        <ItemGroup>
-            <GeneratedFiles Include="$(GeneratedOutputPath)\**\*.cs" />
-        </ItemGroup>
-        <Message Text="Files to be deleted: @(GeneratedFiles)" Importance="high" />
-        <Delete Files="@(GeneratedFiles)">
-            <Output TaskParameter="DeletedFiles" ItemName="DeletedFiles" />
-        </Delete>
-        <Message Text="Deleted file: %(DeletedFiles.Identity)" Importance="high" />
-    </Target>
-
+  <!-- Clean the generated files before generation starts -->
+  <Target Name="CleanGeneratedFiles" BeforeTargets="Build">
+    <Message Text="Cleaning generated files in $(GeneratedOutputPath)\**\*.cs..." Importance="high" />
     <ItemGroup>
-        <PackageReference Include="AwesomeAssertions" Version="7.2.1" />
-        <PackageReference Include="xunit" Version="2.9.3" />
+      <GeneratedFiles Include="$(GeneratedOutputPath)\**\*.cs" />
     </ItemGroup>
+    <Message Text="Files to be deleted: @(GeneratedFiles)" Importance="high" />
+    <Delete Files="@(GeneratedFiles)">
+      <Output TaskParameter="DeletedFiles" ItemName="DeletedFiles" />
+    </Delete>
+    <Message Text="Deleted file: %(DeletedFiles.Identity)" Importance="high" />
+  </Target>
 
-    <ItemGroup>
-        <ProjectReference Include="..\BoolParameterGenerator\PrimS.BoolParameterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AwesomeAssertions" Version="7.2.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+  </ItemGroup>
 
-    <!-- Exclude the generated files from SolutionExplorer -->
-    <ItemGroup>
-        <Compile Remove="Generated\**" />
-        <EmbeddedResource Remove="Generated\**" />
-        <None Remove="$(GeneratedOutputPath)\**\*.cs" />
-        <None Remove="Generated\**" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoolParameterGenerator\PrimS.BoolParameterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+  </ItemGroup>
+  <!-- Exclude the generated files from SolutionExplorer -->
+  <!--<ItemGroup>
+    <Compile Remove="Generated\**" />
+    <EmbeddedResource Remove="Generated\**" />
+    <None Remove="$(GeneratedOutputPath)\**\*.cs" />
+    <None Remove="Generated\**" />
+  </ItemGroup>-->
 
 </Project>

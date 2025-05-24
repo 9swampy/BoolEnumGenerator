@@ -1,7 +1,7 @@
 namespace Another.Tests;
 
 using FluentAssertions;
-using Newtonsoft.Json.Linq;
+using PrimS.BoolParameterGenerator;
 
 public class IsValidEnumThreeTests
 {
@@ -23,14 +23,14 @@ public class IsValidEnumThreeTests
   public void GivenIsValidEnumThreeTrueWhenCastBoolShouldBeTrue()
   {
     var isValidEnumThree = IsValidEnumThree.Yes;
-    (isValidEnumThree).Should().BeTrue();
+    isValidEnumThree.Should().BeTrue();
   }
 
   [Fact]
   public void GivenIsValidEnumThreeNoWhenCastBoolShouldBeFalse()
   {
     var isValidEnumThree = IsValidEnumThree.No;
-    (isValidEnumThree).Should().BeFalse();
+    isValidEnumThree.Should().BeFalse();
   }
 
   [Fact]
@@ -146,7 +146,7 @@ public class IsValidEnumThreeTests
   }
 
   [Fact]
-  public void GivenBoolTrueShouldNotEqualOppositeisValidEnumThree()
+  public void GivenBoolTrueShouldNotEqualOppositeIsValidEnumThree()
   {
     (IsValidEnumThree.Yes == false).Should().BeFalse();
   }

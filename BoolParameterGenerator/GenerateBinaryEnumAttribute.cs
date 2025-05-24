@@ -3,13 +3,11 @@
 using System;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-public class GenerateBinaryEnumAttribute(string namespaceName, string trueMember, string falseMember) : Attribute
+public class GenerateBinaryEnumAttribute(string trueMember, string falseMember) : Attribute
 {
-  public GenerateBinaryEnumAttribute(string namespaceName)
-    : this(namespaceName, "True", "False")
+  public GenerateBinaryEnumAttribute()
+    : this("True", "False")
   { }
-
-  public string NamespaceName { get; } = namespaceName;
 
   public string TrueMember { get; } = trueMember;
 

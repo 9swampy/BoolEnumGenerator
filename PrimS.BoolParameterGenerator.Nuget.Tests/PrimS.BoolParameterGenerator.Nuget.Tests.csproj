@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+	</PropertyGroup>
+
+	<Import Project="..\CommonTest.props" />
+
+	<ItemGroup>
+	  <Compile Include="..\Another.Tests\IsValidBoolThreeTests.cs" Link="IsValidBoolThreeTests.cs" />
+	  <Compile Include="..\Another.Tests\IsValidEnumThreeTests.cs" Link="IsValidEnumThreeTests.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis" Version="4.0.1" />
+		<PackageReference Include="BoolParameterGenerator" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Debug</RestoreSources>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Release</RestoreSources>
+	</PropertyGroup>
+
+	<!--<ItemGroup>
+        <Compile Remove="Generated\**" />
+        <EmbeddedResource Remove="Generated\**" />
+        -->
+	<!--<None Remove="$(GeneratedOutputPath)\**\*.cs" />-->
+	<!--
+        <None Remove="Generated\**" />
+    </ItemGroup>-->
+
+</Project>
