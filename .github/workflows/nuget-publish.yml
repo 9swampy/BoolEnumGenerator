@@ -3,6 +3,11 @@ name: Publish NuGet Packages
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
+      - develop
+      - release/**
+      - hotfix/**
     tags:
       - 'v*.*.*'
 
@@ -34,42 +39,21 @@ jobs:
       - name: Run GitVersion and output raw JSON
         run: dotnet-gitversion --roll-forward Major /home/runner/work/BoolEnumGenerator/BoolEnumGenerator /output json /config GitVersion.yml > gitversion.json
 
-      - name: Check raw GitVersion JSON output
-        run: cat gitversion.json
-
-      - name: Fix placeholders in GitVersion JSON in-place
-        run: sed -i 's/{BranchName}/xxBranchNamexx/g' gitversion.json
-
-      - name: Check fixed GitVersion JSON
-        run: cat gitversion.json
-
-      - name: Replace placeholder with actual branch name in GitVersion JSON
+      - name: Fix GitVersion JSON placeholders
         run: |
-            BRANCH_NAME=$(jq -r '.EscapedBranchName' gitversion.json)
-            # Use | as delimiter to avoid conflicts with / in branch names
-            sed -i "s|xxBranchNamexx|$BRANCH_NAME|g" gitversion.json
+          sed -i 's/{BranchName}/xxBranchNamexx/g' gitversion.json
+          BRANCH_NAME=$(jq -r '.EscapedBranchName' gitversion.json)
+          sed -i "s|xxBranchNamexx|$BRANCH_NAME|g" gitversion.json
+          cat gitversion.json
 
-      - name: Check finalised GitVersion JSON
-        run: cat gitversion.json
-
-      - name: Parse fixed GitVersion JSON and set version output
-        id: parse_version
-        run: |
-          NUGET_VERSIONV2=$(jq -r '.NuGetVersionV2' gitversion.json)
-          echo "NUGET_VERSIONV2=$NUGET_VERSIONV2" >> $GITHUB_OUTPUT
-      
-      - name: Extract version components from GitVersion
+      - name: Parse version for packaging
         id: parse_nuget_version
         run: |
-            FULL_SEMVER=$(jq -r '.FullSemVer' gitversion.json)
-            CLEAN_SEMVER=${FULL_SEMVER//+/-}  # Replace '+' with '-' to make it NuGet-safe
-            echo "FULL_SEMVER=$FULL_SEMVER" >> $GITHUB_ENV
-            echo "NUGET_VERSION=$CLEAN_SEMVER" >> $GITHUB_ENV
-            echo "NUGET_VERSION=$CLEAN_SEMVER" >> $GITHUB_OUTPUT
-
-      - name: Show substituted NuGet version
-        run: |
-            echo "Final version: ${{ steps.parse_version.outputs.NUGET_VERSIONV2 }}"
+          FULL_SEMVER=$(jq -r '.FullSemVer' gitversion.json)
+          CLEAN_SEMVER=${FULL_SEMVER//+/-}
+          echo "FULL_SEMVER=$FULL_SEMVER" >> $GITHUB_ENV
+          echo "NUGET_VERSION=$CLEAN_SEMVER" >> $GITHUB_ENV
+          echo "NUGET_VERSION=$CLEAN_SEMVER" >> $GITHUB_OUTPUT
 
       - name: Ensure local nupkgs directory exists
         run: mkdir -p ./nupkgs
@@ -82,7 +66,7 @@ jobs:
 
       - name: Pack BoolParameterGenerator.Shared
         run: dotnet pack BoolParameterGenerator.Shared/BoolParameterGenerator.Shared.csproj --configuration Release --no-build --output ./nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
-        
+
       - name: Restore BoolParameterGenerator dependencies
         run: dotnet restore BoolParameterGenerator/BoolParameterGenerator.csproj /p:ParameterNugetVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
 
@@ -93,14 +77,14 @@ jobs:
         run: dotnet pack BoolParameterGenerator/BoolParameterGenerator.csproj --configuration Release --no-build --output ./nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
 
       - name: Publish to GitHub NuGet
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
         run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.PUBLISH_TO_GITHUB_PACKAGES }} --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --skip-duplicate
 
       - name: Tag commit if NuGet push was successful
-        if: success()
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
         run: |
-            git config user.name "github-actions"
-            git config user.email "github-actions@github.com"
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-            git tag v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
-            git push origin v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
-
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git tag v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
+          git push origin v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
