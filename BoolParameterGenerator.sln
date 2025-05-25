@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.gitignore = .gitignore
 		CommonTest.props = CommonTest.props
 		Directory.build.props = Directory.build.props
+		GitVersion.yml = GitVersion.yml
 		ReadMe.md = ReadMe.md
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Another.Tests", "Another.Tests\Another.Tests.csproj", "{E5F46C83-570B-4111-AB4E-407E21F90332}"
@@ -29,6 +31,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolParameterGenerator.Github.Tests", "BoolParameterGenerator.Github.Tests\BoolParameterGenerator.Github.Tests.csproj", "{82808403-BBB5-4C87-9B80-4E463FF954FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolParameterGenerator.Shared", "BoolParameterGenerator.Shared\BoolParameterGenerator.Shared.csproj", "{4F6222A3-B18C-E9E1-E941-8016A7F26465}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{13F32E7B-BAB3-4559-A984-D56347819734}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\nuget-publish.yml = .github\workflows\nuget-publish.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +72,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13F32E7B-BAB3-4559-A984-D56347819734} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7AB9BD4D-E0C2-4743-8EE4-256E94A93D81}
