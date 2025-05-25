@@ -26,13 +26,15 @@
 		<PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
 	</ItemGroup>
 
-	<Target Name="ClearNugetCache" BeforeTargets="Pack">
-		<RemoveDir Directories="$(USERPROFILE)\.nuget\packages\prims.boolparametergenerator.shared"></RemoveDir>
+	<Target Name="ClearNugetCache" BeforeTargets="Clean" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <RemoveDir Directories="bin\$(Configuration)" />
+    <RemoveDir Directories="obj\$(Configuration)" />
+    <RemoveDir Directories="$(USERPROFILE)\.nuget\packages\prims.boolparametergenerator.shared"></RemoveDir>
 		<!--<Exec Command="powershell -Command &quot;nuget locals all -clear&quot;" />-->
 	</Target>
 
-	<Target Name="UnzipPackage" AfterTargets="Pack">
-		<RemoveDir Directories="bin\$(Configuration)\unzipped" />
+	<Target Name="UnzipPackage" AfterTargets="Pack" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <!--<RemoveDir Directories="bin\$(Configuration)\unzipped" />-->
 		<Exec Command="powershell -Command &quot;Copy-Item -Path 'bin\$(Configuration)\PrimS.BoolParameterGenerator.Shared.1.0.0.nupkg' 'bin\$(Configuration)\prims.boolparametergenerator.shared.1.0.0.zip'&quot;" />
 		<Exec Command="powershell -Command &quot;Expand-Archive -Path 'bin\$(Configuration)\PrimS.BoolParameterGenerator.Shared.1.0.0.zip' -DestinationPath 'bin\$(Configuration)\unzipped'&quot;" />
 	</Target>

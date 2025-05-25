@@ -39,16 +39,11 @@ If you need to do a comparison:
 
 ### Confirmed working state
 1. Load only the generator projects and the Nuget.Tests.
-1. Clean the BoolParameterGenerator project.
-1. Build the BoolParameterGenerator project.
-1. Pack the BoolParameterGenerator project.
+1. Rebuild the BoolParameterGenerator.Shared project.
+1. Rebuild the BoolParameterGenerator project.
 1. This will have cleared the nuget cache so PrimS.BoolParameterGenerator.Nuget.Tests may be complaining; don't worry.
 1. Clean the Nuget.Tests project.
-1. Delete the Nuget.Tests bin and obj folders.
-1. Delete the folders inside Nuget.Tests\Generated leaving BinaryEnumGenerator to last.
-1. Delete the Nuget.Tests\Generated folder.
-1. Redelete the Nuget.Tests bin and obj folders if they've reappeared.
-1. Clean the Nuget.Tests project again; packages likely will have bangs, but don't worry.
-1. Build the Nuget.Tests project.
+1. Build the Nuget.Tests project !!TWICE!!
 1. You may get PrimS reference errors, open the file erroring and the errors will go away when Visual Studio catches up with Nuget availability.
+1. If you don't see BEG004 in Error List then rebuild the NugetTests project.
 1. You should now have a happily building solution with no errors and content in the Generated folder. However the namespace of the triggering GeneratedBoolEnums doesn't match the generated code; is that a problem? I'd expect to move the GeneratedBoolEnums in to the Another namespace so the triggering partial would match with the generated files but if i do that then the files don't generate.

@@ -26,7 +26,13 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynAnalyzer>true</IsRoslynAnalyzer>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <RestoreSources>$(RestoreSources);..\SharedGenerator\bin\Release</RestoreSources>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(BuildingInsideVisualStudio)' == 'true'">
+      <RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Debug;..\SharedGenerator\bin\Debug</RestoreSources>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release' AND '$(BuildingInsideVisualStudio)' == 'true'">
+    <RestoreSources>$(RestoreSources);..\BoolParameterGenerator\bin\Release;..\SharedGenerator\bin\Release</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,22 +40,21 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
-    <PackageReference Include="PrimS.BoolParameterGenerator.Shared" Version="1.0.0" />
+    <PackageReference Include="PrimS.BoolParameterGenerator.Shared" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="" />
-    <None Remove="bin\Release\netstandard2.0\PrimS.BoolParameterGenerator.dll" />
     <None Include="bin\$(Configuration)\netstandard2.0\PrimS.BoolParameterGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />
   </ItemGroup>
 
-  <Target Name="ClearNugetCache" BeforeTargets="Pack">
+  <Target Name="ClearNugetCache" BeforeTargets="Clean" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <RemoveDir Directories="bin\$(Configuration)" />
     <RemoveDir Directories="$(USERPROFILE)\.nuget\packages\boolparametergenerator"></RemoveDir>
-    <RemoveDir Directories="$(USERPROFILE)\.nuget\packages\prims.boolparametergenerator.shared"></RemoveDir>
     <!--<Exec Command="powershell -Command &quot;nuget locals all -clear&quot;" />-->
   </Target>
 
-  <Target Name="UnzipPackage" AfterTargets="Pack">
+  <Target Name="UnzipPackage" AfterTargets="Pack"  Condition="'$(BuildingInsideVisualStudio)' == 'true'">
     <RemoveDir Directories="bin\$(Configuration)\unzipped" />
     <Exec Command="powershell -Command &quot;Copy-Item -Path 'bin\$(Configuration)\BoolParameterGenerator.1.0.0.nupkg' 'bin\$(Configuration)\BoolParameterGenerator.1.0.0.zip'&quot;" />
     <Exec Command="powershell -Command &quot;Expand-Archive -Path 'bin\$(Configuration)\BoolParameterGenerator.1.0.0.zip' -DestinationPath 'bin\$(Configuration)\unzipped'&quot;" />
