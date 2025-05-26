@@ -63,7 +63,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
-    <PackageReference Include="BoolParameterGenerator.Shared" Version="[$(ParameterNugetVersion)]" PrivateAssets="all" />
+    <PackageReference Include="BoolParameterGenerator.Shared" Version="[$(ParameterNugetVersion)]" />
   </ItemGroup>
 
   <Target Name="UnzipPackage" AfterTargets="Pack" Condition="'$(BuildingInsideVisualStudio)' == 'true' and '$(NCrunch)' != 'true'">
