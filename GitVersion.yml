@@ -1,4 +1,4 @@
-mode: ContinuousDelivery
+mode: ContinuousDeployment
 tag-prefix: '[vV]'
 
 branches:
@@ -6,6 +6,7 @@ branches:
     regex: ^master$
     increment: Patch
     source-branches: []
+    is-release-branch: true
 
   develop:
     regex: ^develop$
