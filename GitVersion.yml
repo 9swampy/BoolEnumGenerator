@@ -1,0 +1,46 @@
+mode: ContinuousDelivery
+tag-prefix: '[vV]'
+
+branches:
+  master:
+    regex: ^master$
+    increment: Patch
+    source-branches: []
+
+  develop:
+    regex: ^develop$
+    increment: Minor
+    source-branches: ['master']
+
+  feature:
+    regex: ^(feature|feat)[/-]
+    increment: Minor
+    source-branches: ['develop']
+    track-merge-target: false
+
+  release:
+    regex: ^release[/-]
+    increment: None
+    source-branches: ['develop']
+    track-merge-target: false
+
+  hotfix:
+    regex: ^hotfix[/-]
+    increment: Patch
+    source-branches: ['master']
+    track-merge-target: false
+
+  pull-request:
+    regex: ^(pull|pr)[/-]
+    increment: Patch
+    source-branches: ['develop', 'master']
+    track-merge-target: false
+
+ignore:
+  sha: []
+
+commit-message-incrementing: Enabled
+major-version-bump-message: '\+semver:\s?(breaking|major)'
+minor-version-bump-message: '\+semver:\s?(feature|minor)'
+patch-version-bump-message: '\+semver:\s?(fix|patch)'
+no-bump-message: '\+semver:\s?(none|skip)'

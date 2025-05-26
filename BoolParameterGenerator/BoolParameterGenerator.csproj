@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <LangVersion>Latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <NoWarn>$(NoWarn);8032</NoWarn>
+    <IsRoslynAnalyzer>true</IsRoslynAnalyzer>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <RootNamespace>PrimS.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageOutputPath>$(SolutionDir)/.nupkgs</PackageOutputPath>
+
+    <!-- NuGet package properties -->
+    <PackageId>BoolParameterGenerator</PackageId>
+    <Version Condition="'$(Version)' == ''">1.0.0</Version>
+    <Authors>9swampy</Authors>
+    <Description>
+      BoolParameterGenerator is a Roslyn analyzer and source generator that automatically creates replacement types for boolean parameters in C# code.
+      This improves code readability and maintainability by replacing ambiguous bools with descriptive types.
+      See the README for usage and examples.
+    </Description>
+    <Owners>9swampy</Owners>
+    <Icon>images/Pbool128x600.png</Icon>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>
+      Initial release of BoolParameterGenerator, a Roslyn analyzer and source generator that autogenerates replacement types for boolean parameters in C# code.
+      Improves code readability and maintainability by replacing boolean parameters with more descriptive types.
+      See https://github.com/9swampy/BoolEnumGenerator for documentation and examples.
+    </PackageReleaseNotes>
+    <Copyright>Copyright (c) 9swampy</Copyright>
+    <PackageTags>Roslyn analyzer boolean parameter generator source-generator</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/9swampy/BoolEnumGenerator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/9swampy/BoolEnumGenerator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIconUrl>https://raw.githubusercontent.com/9swampy/BoolEnumGenerator/master/images/Pbool128x600.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ParameterNugetVersion Condition="'$(ParameterNugetVersion)' == ''">1.0.0</ParameterNugetVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <RestoreSources>$(RestoreSources);$(SolutionDir)/.nupkgs</RestoreSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+    <None Include="bin\$(Configuration)\netstandard2.0\BoolParameterGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
+    <PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
+    <PackageReference Include="BoolParameterGenerator.Shared" Version="[$(ParameterNugetVersion)]" />
+  </ItemGroup>
+
+  <Target Name="UnzipPackage" AfterTargets="Pack" Condition="'$(BuildingInsideVisualStudio)' == 'true' and '$(NCrunch)' != 'true'">
+    <Message Text="### BoolParameterGenerator_AfterPack starts ###" Importance="high" />
+    <RemoveDir Directories="$(PackageOutputPath)/BoolParameterGenerator.$(Version).unzipped" />
+    <Exec Command="powershell -Command &quot;Copy-Item -Path '$(PackageOutputPath)/BoolParameterGenerator.$(Version).nupkg' '$(PackageOutputPath)/BoolParameterGenerator.$(Version).zip' -Force&quot;" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;Expand-Archive -Path '$(PackageOutputPath)/BoolParameterGenerator.$(Version).zip' -DestinationPath '$(PackageOutputPath)/BoolParameterGenerator.$(Version).unzipped' -Force&quot;" />
+    <Message Text="### BoolParameterGenerator_AfterPack finished ###" Importance="high" />
+  </Target>
+</Project>

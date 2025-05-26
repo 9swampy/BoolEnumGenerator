@@ -1,27 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="7.1.0" />
-        <PackageReference Include="xunit" Version="2.9.3" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AwesomeAssertions" Version="7.2.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\BoolEnumGenerator\BoolEnumGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
-        <ProjectReference Include="..\SharedGenerator\SharedGenerator.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Generated\BoolEnumGenerator\" />
-    </ItemGroup>
-
-    <!--<ItemGroup>
-        <Compile Include="$(BaseIntermediateOutputPath)generated\**\*.cs" />
-    </ItemGroup>-->
+  <ItemGroup>
+    <ProjectReference Include="..\BoolParameterGenerator\BoolParameterGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\BoolParameterGenerator.Shared\BoolParameterGenerator.Shared.csproj" />
+  </ItemGroup>
 
 </Project>
