@@ -1,50 +1,103 @@
-# BoolParameterGenerator
+﻿# BoolParameterGenerator
 
-BoolParameterGenerator is a source generator that automatically generates replacement types for boolean parameters.
+**BoolParameterGenerator** is a Roslyn analyzer and source generator that automatically creates replacement types for boolean parameters in C# code. This improves readability and maintainability by replacing ambiguous `bool` parameters with strongly typed, descriptive alternatives.
 
-## Features
+---
 
-- Generates replacement types for boolean parameters.
-- Supports binary enums and binary structs.
-- Easy to use with minimal configuration.
+## ✨ Features
 
-## Installation
+- Replaces `bool` parameters with source-generated binary types.
+- Supports generation of:
+  - Binary enums
+  - Struct-backed bool wrappers
+- Seamless integration with IntelliSense and analyzers.
+- Minimal configuration required.
 
-To install BoolParameterGenerator, add the following package reference to your project:
+---
+
+## 📦 Installation
+
+Install the main analyzer package via NuGet:
+
+```xml
 <PackageReference Include="BoolParameterGenerator" Version="1.0.0" />
+```
 
-## Usage
+This will **transitively install** the required helper package `BoolParameterGenerator.Shared`.
 
-To use BoolParameterGenerator, apply the appropriate attributes to your classes:
+✅ Works in:
+- .NET SDK-style projects
+- Class libraries
+- Console apps
+- Unit test projects
+
+---
+
+## 🚀 Usage
+
+Annotate a `partial class` with one of the supported generator attributes:
+
+```csharp
 using PrimS.BoolParameterGenerator;
-[GenerateBinaryEnum("TrueValue", "FalseValue")] public partial class MyBinaryEnum { }
-[GenerateBoolEnum("TrueValue", "FalseValue")] public partial class MyBoolEnum { }
-It is essential for the class to be partial, because the source generator will create the content for the class in another file.
-The generated content can be found by expanding the Dependencies->Analyzers->BoolParameterGenerator node.
-If you only find a Heartbeat.g.cs in the generated content then check the instructions above have been followed correctly.
 
-Note that the GenerateBinaryEnum/GenerateBoolEnum attributes actually come from the dependency Nuget package BoolParameterGenerator.Shared.
+[GenerateBinaryEnum("TrueValue", "FalseValue")]
+public partial class MyBinaryEnum { }
 
-## License
+[GenerateBoolEnum("TrueValue", "FalseValue")]
+public partial class MyBoolEnum { }
+```
 
-This project is licensed under the MIT License.
+🔧 Requirements:
+- The class **must** be `partial`.
+- The attribute arguments define the **true/false** semantics of the generated type.
 
-### How to regenerate every time 
-(or not when you need to update the templates)
+---
 
-If you need to do a comparison:
-1. Unhide the generated folder (in Another.csproj),
-1. Compare two with three files, 
-1. Make changes to the three file
-1. When happy replicate the changes in the generator template
-1. Delete the two file you expect to get modified to it'll be regenerated
-1. Regenerate the files, rinse repeat and then finally...
-1. When you're 100% happy reinstate the csproj to hide the generated folder.
+## 🔍 Where to Find Generated Code
 
-### Confirmed working state
-1. Load only the generator projects and the Nuget.Tests.
-1. Clean solution
-1. Rebuild the Nuget.Tests project
-1. You may get PrimS reference errors, open the file erroring and the errors will go away when Visual Studio catches up with Nuget availability.
-1. If you don't see BEG004 in Error List then rebuild the NugetTests project.
-1. You should now have a happily building solution with no errors and content in the Generated folder. However the namespace of the triggering GeneratedBoolEnums doesn't match the generated code; is that a problem? I'd expect to move the GeneratedBoolEnums in to the Another namespace so the triggering partial would match with the generated files but if i do that then the files don't generate.
+1. Open your project in **Visual Studio**.
+2. Navigate to `Dependencies > Analyzers > BoolParameterGenerator`.
+3. Expand the node to find the generated `.g.cs` files (e.g., `MyBinaryEnum.g.cs`).
+
+⚠️ If only `Heartbeat.g.cs` appears:
+- Ensure your partial class is declared correctly.
+- Verify that attribute arguments are valid.
+- Rebuild the project to trigger generation.
+
+---
+
+## 📦 About the Shared Package
+
+Although the attributes (`GenerateBinaryEnum`, `GenerateBoolEnum`) are defined in a separate package `BoolParameterGenerator.Shared`, you do **not** need to reference it manually — it is installed transitively.
+
+There isn't much to choose one type attribute over the other atm. Under the hood the implementation is quite different and we expect the BinaryEnum could prove advantageous; especially with respect to extending to a tri-state "boolean". This is a Work-In-Progres and we would be very happy to receive feedback on useCases that may deviate in interesting ways from our own expectations...
+
+---
+
+## 🧪 Confirmed Working Setup
+
+To validate everything is wired correctly:
+1. Open only the generator projects and the test project (`Nuget.Tests`).
+2. Clean the solution.
+3. Rebuild `Nuget.Tests`.
+4. If analyzer references (like `PrimS`) appear unresolved, open the file — Visual Studio will resolve them automatically.
+5. Rebuild again if necessary to see diagnostics like `BEG004`.
+
+---
+
+## ⚠️ Namespace Caveat
+
+If the triggering class and the generated class are in **different namespaces**, generation may fail silently. Ensure the partial class declaration and the generated file reside in the same namespace, or adjust your generator logic to support custom namespaces.
+
+---
+
+## 📄 License
+
+MIT — essentially use however you like, just don't sue me if it doesn't work out!
+
+---
+
+## 🧵 See Also
+
+- [BoolParameterGenerator GitHub Repo](https://github.com/9swampy/BoolEnumGenerator)
+- [Source Generator Cookbook (Roslyn)](https://github.com/dotnet/roslyn/blob/main/docs/features/source-generators.cookbook.md)
