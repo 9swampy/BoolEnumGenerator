@@ -77,11 +77,11 @@ jobs:
         run: dotnet pack BoolParameterGenerator/BoolParameterGenerator.csproj --configuration Release --no-build --output ./nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
 
       - name: Publish to GitHub NuGet
-        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
+        #if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
         run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.PUBLISH_TO_GITHUB_PACKAGES }} --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --skip-duplicate
 
       - name: Tag commit if NuGet push was successful
-        if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
+        #if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"

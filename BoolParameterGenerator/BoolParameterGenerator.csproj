@@ -63,14 +63,14 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.0" />
-    <PackageReference Include="BoolParameterGenerator.Shared" Version="$(ParameterNugetVersion)" PrivateAssets="all" />
+    <PackageReference Include="BoolParameterGenerator.Shared" Version="[$(ParameterNugetVersion)]" PrivateAssets="all" />
   </ItemGroup>
 
   <Target Name="UnzipPackage" AfterTargets="Pack" Condition="'$(BuildingInsideVisualStudio)' == 'true' and '$(NCrunch)' != 'true'">
     <Message Text="### BoolParameterGenerator_AfterPack starts ###" Importance="high" />
-    <RemoveDir Directories="$(PackageOutputPath)/boolparametergenerator.$(Version).unzipped" />
+    <RemoveDir Directories="$(PackageOutputPath)/BoolParameterGenerator.$(Version).unzipped" />
     <Exec Command="powershell -Command &quot;Copy-Item -Path '$(PackageOutputPath)/BoolParameterGenerator.$(Version).nupkg' '$(PackageOutputPath)/BoolParameterGenerator.$(Version).zip' -Force&quot;" />
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;Expand-Archive -Path '$(PackageOutputPath)/BoolParameterGenerator.$(Version).zip' -DestinationPath '$(PackageOutputPath)/boolparametergenerator.$(Version).unzipped' -Force&quot;" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;Expand-Archive -Path '$(PackageOutputPath)/BoolParameterGenerator.$(Version).zip' -DestinationPath '$(PackageOutputPath)/BoolParameterGenerator.$(Version).unzipped' -Force&quot;" />
     <Message Text="### BoolParameterGenerator_AfterPack finished ###" Importance="high" />
   </Target>
 </Project>

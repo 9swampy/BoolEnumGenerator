@@ -2,11 +2,11 @@
 namespace Another;
 
 [PrimS.BoolParameterGenerator.GenerateBinaryEnum("Yes", "No")]
-public partial class IsValidEnumTwo
+public partial class IsValidBinaryEnumTwo
 { }
 
 [PrimS.BoolParameterGenerator.GenerateBinaryEnum("Yes", "No")]
-public partial class IsValidEnumThree
+public partial class IsValidBinaryEnumThree
 { }
 
 [PrimS.BoolParameterGenerator.GenerateBoolEnum("Yes", "No")]
