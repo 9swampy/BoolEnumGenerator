@@ -12,17 +12,17 @@ public class BinaryEnumGenerator() : BaseGenerator(nameof(BinaryEnumGenerator), 
 using System;
 using PrimS.BoolParameterGenerator;
 
-public partial class {typeName} : SmartEnumWrapper<{typeName}, ProxyEnum>, IEquatable<ProxyEnum>, IComparable<ProxyEnum>, IEquatable<ProxyEnumWrapper<{typeName}, ProxyEnum>>, IComparable<ProxyEnumWrapper<{typeName}, ProxyEnum>>
+public partial class {typeName} : SmartEnumWrapper<{typeName}, BinaryEnum>, IEquatable<BinaryEnum>, IComparable<BinaryEnum>, IEquatable<BinaryEnumWrapper<{typeName}, BinaryEnum>>, IComparable<BinaryEnumWrapper<{typeName}, BinaryEnum>>
 {{
-  public static readonly {typeName} {falseMember} = new {typeName}(nameof({falseMember}), ProxyEnum.False);
-  public static readonly {typeName} {trueMember} = new {typeName}(nameof({trueMember}), ProxyEnum.True);
+  public static readonly {typeName} {falseMember} = new {typeName}(nameof({falseMember}), BinaryEnum.False);
+  public static readonly {typeName} {trueMember} = new {typeName}(nameof({trueMember}), BinaryEnum.True);
 
-  public bool BoolValue => ProxyValue == ProxyEnum.True;
+  public bool BoolValue => ProxyValue == BinaryEnum.True;
 
-  public static {typeName} FromValue(ProxyEnum value) => value switch
+  public static {typeName} FromValue(BinaryEnum value) => value switch
   {{
-    ProxyEnum.False => {falseMember},
-    ProxyEnum.True => {trueMember},
+    BinaryEnum.False => {falseMember},
+    BinaryEnum.True => {trueMember},
     _ => throw new ArgumentOutOfRangeException(nameof(value), value, ""Unhandled value for {typeName}"")
   }};
 
@@ -32,19 +32,19 @@ public partial class {typeName} : SmartEnumWrapper<{typeName}, ProxyEnum>, IEqua
     true => {trueMember}
   }};
 
-  private {typeName}(string name, ProxyEnum value) : base(name, value)
+  private {typeName}(string name, BinaryEnum value) : base(name, value)
   {{ }}
 
   public static implicit operator bool({typeName} value)
   {{
-    return value.Value == ProxyEnum.True;
+    return value.Value == BinaryEnum.True;
   }}
 
   public static implicit operator {typeName}(bool value) => value ? {trueMember} : {falseMember};
 
   public static bool operator ==({typeName} left, {typeName} right) => left.Value.Value == right.Value.Value;
 
-  public static bool operator ==({typeName} left, bool right) => left.Value == (right ? ProxyEnum.True : ProxyEnum.False);
+  public static bool operator ==({typeName} left, bool right) => left.Value == (right ? BinaryEnum.True : BinaryEnum.False);
 
   public static bool operator ==({typeName} left, int right) => (int)left.Value.Value == right;
 
@@ -58,19 +58,19 @@ public partial class {typeName} : SmartEnumWrapper<{typeName}, ProxyEnum>, IEqua
 
   public static bool operator !=(bool left, {typeName} right) => (left ? 1 : 0) != (int)right.Value.Value;
 
-  public static implicit operator {typeName}(ProxyEnum value) => {typeName}.FromValue(value);
+  public static implicit operator {typeName}(BinaryEnum value) => {typeName}.FromValue(value);
 
   public override bool Equals(object obj) => obj is {typeName} other && this == other;
 
   public override int GetHashCode() => Value.GetHashCode();
 
-  public bool Equals(ProxyEnum other) => Equals(FromValue(other));
+  public bool Equals(BinaryEnum other) => Equals(FromValue(other));
 
-  public int CompareTo(ProxyEnum other) => CompareTo(FromValue(other));
+  public int CompareTo(BinaryEnum other) => CompareTo(FromValue(other));
 
-  public int CompareTo(ProxyEnumWrapper<{typeName}, ProxyEnum>? other) => Value.CompareTo(other?.Value);
+  public int CompareTo(BinaryEnumWrapper<{typeName}, BinaryEnum>? other) => Value.CompareTo(other?.Value);
 
-  public bool Equals(ProxyEnumWrapper<{typeName}, ProxyEnum>? other) => Value.Equals(other?.Value);
+  public bool Equals(BinaryEnumWrapper<{typeName}, BinaryEnum>? other) => Value.Equals(other?.Value);
 }}";
   }
 

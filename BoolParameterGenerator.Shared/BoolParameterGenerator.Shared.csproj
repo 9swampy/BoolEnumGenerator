@@ -34,8 +34,8 @@
 
   <!-- Unzip packed .nupkg to inspect contents -->
   <Target Name="UnzipSharedPackage" AfterTargets="Pack" Condition="'$(BuildingInsideVisualStudio)' == 'true'">
-    <Copy SourceFiles="$(PackageOutputPath)/BoolParameterGenerator.Shared.1.0.0.nupkg" DestinationFiles="$(PackageOutputPath)/boolparametergenerator.shared.1.0.0.zip" OverwriteReadOnlyFiles="true" />
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;Expand-Archive -Path '$(PackageOutputPath)/boolparametergenerator.shared.1.0.0.zip' -DestinationPath '$(PackageOutputPath)/boolparametergenerator.shared.1.0.0.unzipped' -Force&quot;" />
+    <Copy SourceFiles="$(PackageOutputPath)/BoolParameterGenerator.Shared.1.0.0.nupkg" DestinationFiles="$(PackageOutputPath)/BoolParameterGenerator.Shared.1.0.0.zip" OverwriteReadOnlyFiles="true" />
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;Expand-Archive -Path '$(PackageOutputPath)/BoolParameterGenerator.Shared.1.0.0.zip' -DestinationPath '$(PackageOutputPath)/BoolParameterGenerator.Shared.1.0.0.unzipped' -Force&quot;" />
     <Message Text="### BoolParameterGenerator.Shared_AfterPack finished ###" Importance="high" />
   </Target>
 

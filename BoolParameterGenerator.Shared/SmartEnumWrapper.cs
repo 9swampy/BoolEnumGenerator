@@ -4,8 +4,8 @@ using System;
 using Ardalis.SmartEnum;
 
 public class SmartEnumWrapper<TEnum, TValue>(string name, TValue value)
-  : SmartEnum<TEnum, ProxyEnumWrapper<TEnum, TValue>>(name, new ProxyEnumWrapper<TEnum, TValue>(value))
-  where TEnum : SmartEnum<TEnum, ProxyEnumWrapper<TEnum, TValue>>, IEquatable<TValue>, IComparable<TValue>, IEquatable<ProxyEnumWrapper<TEnum, TValue>>, IComparable<ProxyEnumWrapper<TEnum, TValue>> //ProxyEnumWrapper<TEnum, TValue>>
+  : SmartEnum<TEnum, BinaryEnumWrapper<TEnum, TValue>>(name, new BinaryEnumWrapper<TEnum, TValue>(value))
+  where TEnum : SmartEnum<TEnum, BinaryEnumWrapper<TEnum, TValue>>, IEquatable<TValue>, IComparable<TValue>, IEquatable<BinaryEnumWrapper<TEnum, TValue>>, IComparable<BinaryEnumWrapper<TEnum, TValue>> //BinaryEnumWrapper<TEnum, TValue>>
   where TValue : notnull, Enum
 {
   public TValue ProxyValue => Value;

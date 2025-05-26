@@ -1,6 +1,6 @@
 ﻿namespace PrimS.BoolParameterGenerator;
 
-public enum ProxyEnum
+public enum BinaryEnum
 {
   False = 0,
   True = 1
