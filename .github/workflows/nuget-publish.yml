@@ -56,7 +56,7 @@ jobs:
           echo "NUGET_VERSION=$CLEAN_SEMVER" >> $GITHUB_OUTPUT
 
       - name: Ensure local nupkgs directory exists
-        run: mkdir -p ./nupkgs
+        run: mkdir -p ./.nupkgs
 
       - name: Restore BoolParameterGenerator.Shared dependencies
         run: dotnet restore BoolParameterGenerator.Shared/BoolParameterGenerator.Shared.csproj
@@ -65,7 +65,7 @@ jobs:
         run: dotnet build BoolParameterGenerator.Shared/BoolParameterGenerator.Shared.csproj --configuration Release --no-restore /p:GeneratePackageOnBuild=false
 
       - name: Pack BoolParameterGenerator.Shared
-        run: dotnet pack BoolParameterGenerator.Shared/BoolParameterGenerator.Shared.csproj --configuration Release --no-build --output ./nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
+        run: dotnet pack BoolParameterGenerator.Shared/BoolParameterGenerator.Shared.csproj --configuration Release --no-build --output ./.nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
 
       - name: Restore BoolParameterGenerator dependencies
         run: dotnet restore BoolParameterGenerator/BoolParameterGenerator.csproj /p:ParameterNugetVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
@@ -74,11 +74,11 @@ jobs:
         run: dotnet build BoolParameterGenerator/BoolParameterGenerator.csproj --configuration Release --no-restore /p:GeneratePackageOnBuild=false
 
       - name: Pack BoolParameterGenerator
-        run: dotnet pack BoolParameterGenerator/BoolParameterGenerator.csproj --configuration Release --no-build --output ./nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
+        run: dotnet pack BoolParameterGenerator/BoolParameterGenerator.csproj --configuration Release --no-build --output ./.nupkgs /p:PackageVersion=${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
 
       - name: Publish to GitHub NuGet
         #if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
-        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.PUBLISH_TO_GITHUB_PACKAGES }} --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --skip-duplicate
+        run: dotnet nuget push ./.nupkgs/*.nupkg --api-key ${{ secrets.PUBLISH_TO_GITHUB_PACKAGES }} --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --skip-duplicate
 
       - name: Tag commit if NuGet push was successful
         #if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/release/') || startsWith(github.ref, 'refs/heads/hotfix/') || github.ref == 'refs/heads/develop'
