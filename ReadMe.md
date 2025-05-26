@@ -2,6 +2,38 @@
 
 **BoolParameterGenerator** is a Roslyn analyzer and source generator that automatically creates replacement types for boolean parameters in C# code. This improves readability and maintainability by replacing ambiguous `bool` parameters with strongly typed, descriptive alternatives.
 
+## 🚫 Analyzer Rules Discouraging `bool` Parameters
+
+Using raw `bool` parameters in method signatures is often discouraged because it reduces code readability and clarity. Calls like `SetFeature(true)` can be ambiguous without context, making the code harder to understand and maintain.
+
+### Motivations for Avoiding `bool` Parameters
+
+- **Improved readability:** Boolean parameters often obscure the intent of the method call.  
+- **Explicit intent:** Descriptive enums or strong types clarify the purpose.  
+- **Better API discoverability:** Strongly typed parameters enhance IntelliSense and documentation.  
+- **Easier maintenance:** Clearer code reduces bugs and onboarding time.  
+- **Extensibility:** Enums or wrappers allow for additional states beyond simple true/false.
+
+### Popular Analyzers and Their Rules
+
+- **SonarAnalyzer (SonarLint / SonarQube)**  
+  Rule: [S1133 - Remove boolean parameters](https://rules.sonarsource.com/csharp/RSPEC-1133)  
+  Flags methods with boolean parameters to encourage more meaningful alternatives.
+
+- **Roslynator**  
+  Rule: [RCS1155 - Avoid boolean parameters in methods](https://github.com/JosefPihrt/Roslynator/blob/master/docs/analyzers/RCS1155.md)  
+  Suggests replacing boolean parameters with separate methods or enums for better readability.
+
+- **StyleCop Analyzers**  
+  While no specific rule bans boolean parameters, StyleCop encourages clear, descriptive API design that indirectly discourages ambiguous booleans.
+
+### How BoolParameterGenerator Addresses These Issues
+
+- Generates strongly typed, descriptive replacements for `bool` parameters.  
+- Improves code clarity, intent, and discoverability.  
+- Enables future extensibility beyond binary states.  
+- Helps maintain cleaner and more maintainable APIs.
+
 ---
 
 ## ✨ Features
@@ -52,6 +84,17 @@ public partial class MyBoolEnum { }
 - The attribute arguments define the **true/false** semantics of the generated type.
 
 ---
+
+## 📚 Example Usage and Guidance
+
+For detailed examples illustrating the benefits of BoolParameterGenerator, see the following:
+
+- **Good Examples: Caller IntelliSense** — [CallerIntellisenseGoodExamples.cs](./BoolParameterGenerator.Github.Example/CallerIntellisenseGoodExamples.cs)  
+- **Good Examples: Implementation Patterns** — [ImplementationGoodExamples.cs](./BoolParameterGenerator.Github.Example/ImplementationGoodExamples.cs)  
+- **Bad Examples: Caller IntelliSense Pitfalls** — [CallerIntellisenseBadExamples.cs](./BoolParameterGenerator.Github.Example/CallerIntellisenseBadExamples.cs)  
+- **Bad Examples: Implementation Pitfalls** — [ImplementationBadExamples.cs](./BoolParameterGenerator.Github.Example/ImplementationBadExamples.cs)  
+
+These demonstrate why replacing raw `bool` parameters with strongly typed proxies enhances readability, API clarity, and maintainability.
 
 ## 🔍 Where to Find Generated Code
 

@@ -20,7 +20,10 @@ internal sealed class SmartEnumWrapper<TEnum, TValue>
   public override bool Equals(object? obj)
   {
     if (obj is SmartEnumWrapper<TEnum, TValue> other)
+    {
       return ProxyValue.Equals(other.ProxyValue);
+    }
+
     return false;
   }
 
