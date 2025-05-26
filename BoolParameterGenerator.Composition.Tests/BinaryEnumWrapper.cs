@@ -16,7 +16,10 @@ internal sealed class BinaryEnumWrapper<TEnum, TValue>
   public override bool Equals(object? obj)
   {
     if (obj is BinaryEnumWrapper<TEnum, TValue> other)
+    {
       return Value.Equals(other.Value);
+    }
+
     return false;
   }
 
