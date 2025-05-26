@@ -11,8 +11,7 @@
   <Import Project="..\CommonTest.props" />
 
   <ItemGroup>
-    <PackageReference Include="BoolParameterGenerator" Version="0.1.0-feature-TransitiveAndComposition.1-12" PrivateAssets="true" />
-    <!--<PackageReference Include="BoolParameterGenerator.Shared" Version="0.1.0-alpha.10" />-->
+    <PackageReference Include="BoolParameterGenerator" Version="0.1.0-feature-TransitiveAndComposition.1-13" PrivateAssets="true" />
   </ItemGroup>
 
   <ItemGroup>

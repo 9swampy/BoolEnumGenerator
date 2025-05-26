@@ -41,7 +41,6 @@
     <PackageProjectUrl>https://github.com/9swampy/BoolEnumGenerator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/9swampy/BoolEnumGenerator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageType>Analyzer</PackageType>
     <PackageIconUrl>https://raw.githubusercontent.com/9swampy/BoolEnumGenerator/master/images/Pbool128x600.png</PackageIconUrl>
   </PropertyGroup>
 
