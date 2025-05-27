@@ -86,5 +86,18 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git tag v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
-          git push origin v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
+
+          TAG=v${{ steps.parse_nuget_version.outputs.NUGET_VERSION }}
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists. Skipping tagging."
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
+
+        # Login to Nuget 9swampy->Api Keys and regenerate, copy to...
+        # GitHub navigate to repo->Settings->Secrets and variables->Actions and set NUGET_GITHUBACTIONS
+      - name: Publish to Nuget
+        if: github.ref == 'refs/heads/master'
+        run: dotnet nuget push ./.nupkgs/*.nupkg --api-key ${{ secrets.NUGET_GITHUBACTIONS }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
