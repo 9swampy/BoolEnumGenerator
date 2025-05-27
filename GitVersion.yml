@@ -20,7 +20,7 @@ branches:
     track-merge-target: false
 
   release:
-    regex: ^release[/-]
+    regex: ^release$
     increment: None
     source-branches: ['develop']
     track-merge-target: false
