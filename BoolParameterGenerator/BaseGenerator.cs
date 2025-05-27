@@ -35,7 +35,7 @@ public abstract class BaseGenerator(string generatorName, string attributeName) 
       if (candidates.Length == 0)
       {
         spc.AddSource("GeneratorHeartbeat.g.cs", SourceText.From($"// {_generatorName} Generator ran successfully but found no {_attributeName} to process.", Encoding.UTF8));
-        ReportDiagnostic(spc, "BEG003", "{_generatorName} Generator ran successfully but found no {_attributeName} to process.", DiagnosticSeverity.Warning, Location.None);
+        ReportDiagnostic(spc, "BEG003", $"{_generatorName} Generator ran successfully but found no {_attributeName} to process.", DiagnosticSeverity.Warning, Location.None);
         return;
       }
 
