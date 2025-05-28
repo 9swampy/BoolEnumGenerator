@@ -5,12 +5,12 @@
 /// </summary>
 public class ImplementationGoodExamples
 {
-  public ExampleSetting Setting { get; private set; }
+  public ExampleFeatureSwitchSetting Setting { get; private set; }
 
   /// <summary>
   /// Uses strongly typed Setting for clear assignment.
   /// </summary>
-  public void Set(ExampleSetting value)
+  public void Set(ExampleFeatureSwitchSetting value)
   {
     Setting = value;
   }
@@ -28,15 +28,15 @@ public class ImplementationGoodExamples
   /// We would welcome input on specific use cases or scenarios where this limitation impacts you,
   /// to help guide future improvements.
   /// </summary>
-  public void Initialize() => Initialize(ExampleSetting.Disabled);
+  public void Initialize() => Initialize(ExampleFeatureSwitchSetting.Disabled);
 
   /// <summary>
   /// Initializes diagnostics with the specified setting.
   /// </summary>
   /// <param name="diagnostics">The diagnostics setting to use.</param>
-  public static void Initialize(ExampleSetting diagnostics)
+  public static void Initialize(ExampleFeatureSwitchSetting diagnostics)
   {
-    if (diagnostics == ExampleSetting.Enabled)
+    if (diagnostics == ExampleFeatureSwitchSetting.Enabled)
     {
       Console.WriteLine("Diagnostics initialized.");
     }
@@ -47,7 +47,7 @@ public class ImplementationGoodExamples
   /// </summary>
   public void Toggle()
   {
-    Setting = Setting == ExampleSetting.Enabled ? ExampleSetting.Disabled : ExampleSetting.Enabled;
+    Setting = Setting == ExampleFeatureSwitchSetting.Enabled ? ExampleFeatureSwitchSetting.Disabled : ExampleFeatureSwitchSetting.Enabled;
   }
 
   /// <summary>
@@ -58,8 +58,8 @@ public class ImplementationGoodExamples
     var env = Environment.GetEnvironmentVariable("FEATURE_ENABLED");
     Setting = env?.ToLowerInvariant() switch
     {
-      "true" => ExampleSetting.Enabled,
-      "false" => ExampleSetting.Disabled,
+      "true" => ExampleFeatureSwitchSetting.Enabled,
+      "false" => ExampleFeatureSwitchSetting.Disabled,
       _ => throw new InvalidOperationException("Invalid value for FEATURE_ENABLED")
     };
   }
