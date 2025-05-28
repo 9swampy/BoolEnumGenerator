@@ -8,13 +8,16 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <NoWarn>$(NoWarn);8032</NoWarn>
     <IsRoslynAnalyzer>true</IsRoslynAnalyzer>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
     <RootNamespace>PrimS.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IncludeSource>true</IncludeSource>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
     <PackageOutputPath>$(SolutionDir)/.nupkgs</PackageOutputPath>
 
     <!-- NuGet package properties -->
