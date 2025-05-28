@@ -9,9 +9,9 @@ public class CallerIntellisenseGoodExamples
   /// Clear call site: SetFeatureState(ExampleSetting.Enabled);
   /// No guessing required, overloads provide clarity.
   /// </summary>
-  public static void SetFeatureState(ExampleSetting state)
+  public static void SetFeatureState(ExampleFeatureSwitchSetting state)
   {
-    if (state == ExampleSetting.Enabled)
+    if (state == ExampleFeatureSwitchSetting.Enabled)
     {
       Console.WriteLine("Feature enabled");
     }

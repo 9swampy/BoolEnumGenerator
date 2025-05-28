@@ -1,4 +1,6 @@
-﻿# BoolParameterGenerator
+﻿[![NuGet](https://img.shields.io/nuget/vpre/BoolParameterGenerator?label=NuGet)](https://www.nuget.org/packages/BoolParameterGenerator/)
+[![Build Status](https://github.com/9swampy/BoolEnumGenerator/actions/workflows/nuget-publish.yml/badge.svg?branch=master)](https://github.com/9swampy/BoolEnumGenerator/actions/workflows/nuget-publish.yml)
+# BoolParameterGenerator
 
 **BoolParameterGenerator** is a Roslyn analyzer and source generator that automatically creates replacement types for boolean parameters in C# code. This improves readability and maintainability by replacing ambiguous `bool` parameters with strongly typed, descriptive alternatives.
 
@@ -117,14 +119,15 @@ There isn't much to choose one type attribute over the other atm. Under the hood
 
 ---
 
-## 🧪 Confirmed Working Setup
+## 🧪 Confirmed Working Build/Contribution Setup
 
-To validate everything is wired correctly:
-1. Open only the generator projects and the test project (`Nuget.Tests`).
+Check out the latest master branch then validate everything is wired correctly:
+1. Open only the generator projects (`BoolParameterGenerator` and `BoolParameterGenerator.Shared`) and the test project (`BoolParameterGenerator.Pack.Tests`).
 2. Clean the solution.
-3. Rebuild `Nuget.Tests`.
-4. If analyzer references (like `PrimS`) appear unresolved, open the file — Visual Studio will resolve them automatically.
-5. Rebuild again if necessary to see diagnostics like `BEG004`.
+3. Rebuild `BoolParameterGenerator.Pack.Tests`.
+4. If BoolParameterGenerator analyzer references appear unresolved, try opening the file — often Visual Studio will resolve them automatically when the file is activated.
+5. Rebuild again if necessary
+1. You'll hopefully see `BEG004` diagnostics.
 
 ---
 
