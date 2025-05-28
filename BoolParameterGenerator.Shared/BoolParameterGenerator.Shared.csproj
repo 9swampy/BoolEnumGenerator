@@ -11,7 +11,11 @@
     <PackageId>BoolParameterGenerator.Shared</PackageId>
     <Version>1.0.0</Version>
     <Authors>9swampy</Authors>
-    <Description>Shared types for BoolParameterGenerator and related analyzers.</Description>
+    <Description>
+      Shared types for BoolParameterGenerator and related analyzers.
+      You should not need to install this BoolParameterGenerator.Shared package.
+      The primary BoolParameterGenerator analyzer package should include this as a transitive reference.
+    </Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/9swampy/BoolEnumGenerator</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>

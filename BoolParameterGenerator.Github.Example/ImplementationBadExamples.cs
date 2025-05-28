@@ -5,14 +5,14 @@
 /// </summary>
 public class ImplementationBadExamples
 {
-  public ExampleSetting Setting { get; private set; }
+  public ExampleFeatureSwitchSetting Setting { get; private set; }
 
   /// <summary>
   /// Manual conversion from bool, repeated often and error prone.
   /// </summary>
   public void SetFromBool(bool value)
   {
-    Setting = value ? ExampleSetting.Enabled : ExampleSetting.Disabled;
+    Setting = value ? ExampleFeatureSwitchSetting.Enabled : ExampleFeatureSwitchSetting.Disabled;
   }
 
   /// <summary>
@@ -22,11 +22,11 @@ public class ImplementationBadExamples
   {
     if (value == 1)
     {
-      Setting = ExampleSetting.Enabled;
+      Setting = ExampleFeatureSwitchSetting.Enabled;
     }
     else if (value == 0)
     {
-      Setting = ExampleSetting.Disabled;
+      Setting = ExampleFeatureSwitchSetting.Disabled;
     }
     else
     {
