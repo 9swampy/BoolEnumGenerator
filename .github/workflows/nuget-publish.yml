@@ -96,6 +96,13 @@ jobs:
             git push origin "$TAG"
           fi
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name: published-nuget-package
+          include-hidden-files: true
+          path: ./.nupkgs/*.*nupkg
+      
         # Login to Nuget 9swampy->Api Keys and regenerate, copy to...
         # GitHub navigate to repo->Settings->Secrets and variables->Actions and set NUGET_GITHUBACTIONS
       - name: Publish to Nuget
