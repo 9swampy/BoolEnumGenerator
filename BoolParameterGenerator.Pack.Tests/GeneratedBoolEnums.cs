@@ -17,3 +17,11 @@ public partial class IsValidBinaryEnumFruit
 [PrimS.BoolParameterGenerator.GenerateBoolEnum("Apple", "Banana")]
 public partial class IsValidBoolFruit
 { }
+
+[GenerateBinaryEnum("Active", "Inactive", GenerateAssertionExtensions = false)]
+public partial class StatusBinaryEnumMinimal
+{ }
+
+[GenerateBoolEnum("Enabled", "Disabled", GenerateAssertionExtensions = false)]
+public partial class FeatureBoolMinimal
+{ }
