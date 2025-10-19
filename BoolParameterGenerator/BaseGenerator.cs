@@ -74,6 +74,7 @@ public abstract class BaseGenerator(string generatorName, string attributeName) 
         var namespaceName = GetNamespace(classDeclaration);
         var trueMember = GetTrueMember(attributeData);
         var falseMember = GetFalseMember(attributeData);
+        var generateAssertionExtensions = GetGenerateAssertionExtensions(attributeData);
 
         var fullTypeName = string.IsNullOrEmpty(namespaceName)
             ? binaryEnumName
@@ -92,10 +93,14 @@ public abstract class BaseGenerator(string generatorName, string attributeName) 
 
         var source = GenerateType(binaryEnumName, namespaceName, trueMember, falseMember);
         spc.AddSource($"{binaryEnumName}.g.cs", SourceText.From(source, Encoding.UTF8));
-        source = GenerateAssertions(binaryEnumName, namespaceName, trueMember, falseMember);
-        spc.AddSource($"{binaryEnumName}Assertions.g.cs", SourceText.From(source, Encoding.UTF8));
-        source = GenerateExtensions(binaryEnumName, namespaceName);
-        spc.AddSource($"{binaryEnumName}Extensions.g.cs", SourceText.From(source, Encoding.UTF8));
+
+        if (generateAssertionExtensions)
+        {
+          source = GenerateAssertions(binaryEnumName, namespaceName, trueMember, falseMember);
+          spc.AddSource($"{binaryEnumName}Assertions.g.cs", SourceText.From(source, Encoding.UTF8));
+          source = GenerateExtensions(binaryEnumName, namespaceName);
+          spc.AddSource($"{binaryEnumName}Extensions.g.cs", SourceText.From(source, Encoding.UTF8));
+        }
 
         ReportDiagnostic(spc, "BEG004", $"{_generatorName} generated code for class: {binaryEnumName}", DiagnosticSeverity.Info, classDeclaration);
       }
@@ -176,6 +181,17 @@ public abstract class BaseGenerator(string generatorName, string attributeName) 
     {
       return "False";
     }
+  }
+
+  private static bool GetGenerateAssertionExtensions(AttributeData attributeData)
+  {
+    var property = attributeData.NamedArguments.FirstOrDefault(kvp => kvp.Key == "GenerateAssertionExtensions");
+    if (property.Value.Value is bool value)
+    {
+      return value;
+    }
+
+    return true;
   }
 
   private static void ReportDiagnostic(SourceProductionContext context, string id, string message, DiagnosticSeverity severity, Location location)
