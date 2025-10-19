@@ -18,7 +18,7 @@
     <IncludeSource>true</IncludeSource>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <PackageOutputPath>$(SolutionDir)/.nupkgs</PackageOutputPath>
+    <PackageOutputPath>$(SolutionDir).nupkgs</PackageOutputPath>
 
     <!-- NuGet package properties -->
     <PackageId>BoolParameterGenerator</PackageId>

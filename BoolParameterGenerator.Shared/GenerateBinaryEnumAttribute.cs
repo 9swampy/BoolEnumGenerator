@@ -12,4 +12,6 @@ public class GenerateBinaryEnumAttribute(string trueMember, string falseMember) 
   public string TrueMember { get; } = trueMember;
 
   public string FalseMember { get; } = falseMember;
+
+  public bool GenerateAssertionExtensions { get; set; } = true;
 }
